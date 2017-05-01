@@ -17,7 +17,7 @@ module.exports = function(controller) {
     });
 
     controller.on('sticker_received', function(bot, message) {
-        bot.reply(message, 'Niezle.');
+        bot.reply(message, 'Gon sie.');
     });
 
     controller.on('image_received', function(bot, message) {
