@@ -55,4 +55,8 @@ module.exports = function(controller) {
     controller.on('audio_received', function(bot, message) {
         bot.reply(message, 'I heard that!!');
     });
+
+    controller.on('facebook_postback', function(bot, message) {
+        bot.reply(message, 'This is the payload selected: ' + message.payload);
+    });
 };
