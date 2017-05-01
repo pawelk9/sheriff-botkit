@@ -25,6 +25,6 @@ module.exports = function(controller) {
         },
     ]);
 
-    console.log(controller.api.messenger_profile.get_greeting());
+    console.log(controller.api.thread_settings.get_greeting());
 
 }
