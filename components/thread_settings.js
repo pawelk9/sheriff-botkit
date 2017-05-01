@@ -9,6 +9,5 @@ module.exports = function(controller) {
     controller.api.messenger_profile.get_started('sample_get_started_payload');
     
 
-    console.log(controller.api.thread_settings.get_greeting());
 
 }
