@@ -5,6 +5,7 @@ var debug = require('debug')('botkit:thread_settings');
 module.exports = function(controller) {
 
     console.log('Configuring Facebook thread settings...');
+    con
     controller.api.thread_settings.greeting('Witaj, jestem Szeryf!');
     controller.api.thread_settings.get_started('sample_get_started_payload');
     controller.api.thread_settings.menu([
@@ -24,5 +25,7 @@ module.exports = function(controller) {
           "url":"https://github.com/howdyai/botkit/blob/master/readme-facebook.md"
         },
     ]);
+
+    console.log(controller.api.messenger_profile.get_greeting());
 
 }
