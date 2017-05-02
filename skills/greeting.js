@@ -1,6 +1,6 @@
 module.exports = function(controller) {
 
-    const payload = require('./../consts/payload');
+    const payload = require('./../consts/payloads');
     
 
     controller.on('facebook_postback', function(bot, message) {
