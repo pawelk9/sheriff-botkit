@@ -31,10 +31,9 @@ module.exports = function (controller) {
             });
         }
 
-        controller.on('facebook_postback', function (bot, message) {
-            if (message.payload === payload.MESSAGE_DRIVER_YES) {
-                bot.reply(message, "Sending message to driver");
-            }
-        });
+        if (message.payload === payload.MESSAGE_DRIVER_YES) {
+            bot.reply(message, "Sending message to driver");
+        }
+        
     });
 };
