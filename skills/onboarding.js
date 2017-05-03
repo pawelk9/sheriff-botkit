@@ -29,7 +29,11 @@ module.exports = function (controller) {
         }
 
         if (message.payload === payload.MESSAGE_DRIVER_YES) {
-            bot.reply(message, "Sending message to driver");
+            bot.reply(message, "Alright, send me anything :)");
+
+            controller.on('image_received', function(bot, message) {
+                bot.reply(message, 'Dupa nie obrazek');
+            });
         }
 
         if (message.payload === payload.MESSAGE_DRIVER_NO) {
