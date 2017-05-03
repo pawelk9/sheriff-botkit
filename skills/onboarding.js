@@ -5,7 +5,7 @@ const messageDriver = require('./../messages/message_driver');
 module.exports = function (controller) {
 
     controller.on('facebook_postback', function (bot, message) {
-        
+
         if (message.payload === payload.GET_STARTED) {
             bot.reply(message, 'Welcome message');
             bot.reply(message, {
@@ -30,6 +30,10 @@ module.exports = function (controller) {
 
         if (message.payload === payload.MESSAGE_DRIVER_YES) {
             bot.reply(message, "Sending message to driver");
+        }
+
+        if (message.payload === payload.MESSAGE_DRIVER_NO) {
+            bot.reply(message, "No? Here are main functionalities");
         }
     });
 };
