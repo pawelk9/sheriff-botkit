@@ -1,12 +1,12 @@
 const payload = require('./../consts/payloads');
-const receiveNotification = require('./../messages/receiveNotification');
+const receiveNotifications = require('./../messages/receive_notifications');
 
 module.exports = function (controller) {
 
     controller.on('facebook_postback', function (bot, message) {
         if (message.payload === payload.GET_STARTED) {
             bot.reply(message, 'Welcome message');
-            bot.reply(message, {attachment: receiveNotification,});
+            bot.reply(message, {attachment: receiveNotifications});
 
             controller.on('facebook_postback', function (bot, message) {
                 switch (message.payload) {
