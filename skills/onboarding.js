@@ -43,6 +43,8 @@ module.exports = function (controller) {
                         break;
                 }
             });
+
+            bot.reply(message, 'Test');
         }
     });
 };
