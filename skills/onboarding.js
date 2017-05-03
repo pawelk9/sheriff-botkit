@@ -27,7 +27,7 @@ module.exports = function (controller) {
             };
 
             bot.reply(message, {
-                attachment: receiveNotification,s
+                attachment: receiveNotification,
             });
 
             controller.on('facebook_postback', function (bot, message) {
