@@ -38,7 +38,7 @@ module.exports = function (controller) {
                         bot.reply(message, "Yes message");
                         break;
 
-                    case payload.RECEIVE_NOTIFICATIONS_YES:
+                    case payload.RECEIVE_NOTIFICATIONS_NO:
                         bot.reply(message, 'No message');
                         break;
                 }
