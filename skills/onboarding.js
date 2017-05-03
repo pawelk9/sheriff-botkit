@@ -1,5 +1,6 @@
 const payload = require('./../consts/payloads');
 const receiveNotifications = require('./../messages/receive_notifications');
+const messageDriver = require('./../messages/message_driver');
 
 module.exports = function (controller) {
 
@@ -13,11 +14,12 @@ module.exports = function (controller) {
                     case payload.RECEIVE_NOTIFICATIONS_YES:
                         bot.reply(message, 'Store in DB');
                         bot.reply(message, "Yes message");
+                        bot.reply(message, {attachment: messageDriver});
                         break;
 
                     case payload.RECEIVE_NOTIFICATIONS_NO:
                         bot.reply(message, 'No message');
-                        bot.reply(message, 'Test');
+                        bot.reply(message, {attachment: messageDriver});
                         break;
                 }
             });
