@@ -3,39 +3,46 @@ const payload = require('./../consts/payloads');
 module.exports = function (controller) {
 
     controller.on('facebook_postback', function (bot, message) {
-
         if (message.payload === payload.GET_STARTED) {
             bot.reply(message, 'Welcome message');
 
-            var attachment = {
-                'type': 'template',
-                'payload': {
-                    'template_type': 'generic',
-                    'elements': [{
-                        'title': 'Chocolate Cookie',
-                        'image_url': 'http://cookies.com/cookie.png',
-                        'subtitle': 'A delicious chocolate cookie',
-                        'buttons': [{
-                            'type': 'postback',
-                            'title': 'Eat Cookie',
-                            'payload': 'chocolate'
-                        }]
-                    }, ]
+            var receiveNotification = {
+                "type": "template",
+                "payload": {
+                    "template_type": "button",
+                    "text": "Receive notifications?",
+                    "buttons": [
+                        {
+                            "type": "postback",
+                            "title": "Yes",
+                            "payload": payload.RECEIVE_NOTIFICATIONS_YES
+                        },
+                        {
+                            "type": "postback",
+                            "title": "No",
+                            "payload": payload.RECEIVE_NOTIFICATIONS_NO
+                        }
+                    ]
                 }
             };
 
             bot.reply(message, {
-                attachment: attachment,
+                attachment: receiveNotification,s
             });
 
             controller.on('facebook_postback', function (bot, message) {
 
-                if (message.payload == 'chocolate') {
-                    bot.reply(message, 'You ate the chocolate cookie!')
-                }
+                switch (message.payload) {
+                    case payload.RECEIVE_NOTIFICATIONS_YES:
+                        bot.reply(message, 'Store in DB');
+                        bot.reply(message, "Yes message");
+                        break;
 
+                    case payload.RECEIVE_NOTIFICATIONS_YES:
+                        bot.reply(message, 'No message');
+                        break;
+                }
             });
         }
-
     });
 };
