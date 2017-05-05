@@ -11,7 +11,7 @@ module.exports = function (controller) {
                 return false;
             }
         } else {
-            bot.reply(message, 'Nice text');
+            controller.trigger('text_received', [bot, message]);
         }
     });
 }
