@@ -38,7 +38,7 @@ var debug = require('debug')('botkit:main');
 
 // Create the Botkit controller, which controls all instances of the bot.
 var controller = Botkit.facebookbot({
-    debug: true,
+    debug: false,
     receive_via_postback: false,
     require_delivery: true,
     verify_token: process.env.verify_token,
