@@ -6,23 +6,23 @@ module.exports = function (controller) {
 
         switch (message.payload) {
 
-            case payload.SUBSCRIBE_TO_NOTIFICATIONS:
+            case payload.MENU_SUBSCRIBE_TO_NOTIFICATIONS:
                 bot.reply(message, 'SUBSCRIBE_TO_NOTIFICATIONS');
                 break;
 
-            case payload.UNSUBSCRIBE_TO_NOTIFICATIONS:
+            case payload.MENU_UNSUBSCRIBE_TO_NOTIFICATIONS:
                 bot.reply(message, 'UNSUBSCRIBE_TO_NOTIFICATIONS');
                 break;
 
-            case payload.BLOCK_DRIVER:
+            case payload.MENU_BLOCK_DRIVER:
                 bot.reply(message, 'BLOCK_DRIVER');
                 break;
 
-            case payload.MESSAGE_DRIVER:
+            case payload.MENU_MESSAGE_DRIVER:
                 bot.reply(message, 'MESSAGE_DRIVER');
                 break;
 
-            case payload.GET_HELP:
+            case payload.MENU_GET_HELP:
                 bot.reply(message, 'GET_HELP');
                 break;
         }

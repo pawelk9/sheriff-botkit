@@ -11,34 +11,34 @@ module.exports = function (controller) {
         "locale": "default",
         "composer_input_disabled": false,
         "call_to_actions": [{
-                "title": "Sukooo",
+                "title": "Zarządzaj notyfikacjami",
                 "type": "nested",
                 "call_to_actions": [{
                         "title": "Powiadamiaj mnie",
                         "type": "postback",
-                        "payload": "SUBSCRIBE_TO_NOTIFICATIONS"
+                        "payload": payload.MENU_SUBSCRIBE_TO_NOTIFICATIONS
                     },
                     {
                         "title": "Rezygnuję z powiadomień",
                         "type": "postback",
-                        "payload": "UNSUBSCRIBE_TO_NOTIFICATIONS"
+                        "payload": payload.MENU_UNSUBSCRIBE_TO_NOTIFICATIONS
                     },
                     {
                         "title": "Zablokuj użytkownika",
                         "type": "postback",
-                        "payload": "BLOCK_DRIVER"
+                        "payload": payload.MENU_BLOCK_DRIVER
                     }
                 ]
             },
             {
                 "title": "Powiadom kierowce",
                 "type": "postback",
-                "payload": "MESSAGE_DRIVER"
+                "payload": payload.MENU_MESSAGE_DRIVER
             },
             {
                 "title": "Pomocy!",
                 "type": "postback",
-                "payload": "GET_HELP"
+                "payload": payload.MENU_GET_HELP
             }
         ]
     }]);
