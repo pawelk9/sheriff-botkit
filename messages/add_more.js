@@ -14,6 +14,11 @@ module.exports = {
                 "type": "postback",
                 "title": "Send message",
                 "payload": payload.MESSAGE_DRIVER
+            },
+            {
+                "type": "postback",
+                "title": "Resign",
+                "payload": payload.RESIGN
             }
         ]
     }
