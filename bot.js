@@ -64,20 +64,13 @@ require(__dirname + '/components/onboarding.js')(controller);
 // Enable Dashbot.io plugin
 require(__dirname + '/components/plugin_dashbot.js')(controller);
 
-glob('skills/**/*.js', function( err, files ) {
-  files.forEach(function(file){
-      console.log("./" + file);
-      require("./" + file)(controller);
-  });
+// Add skills
+glob('skills/**/*.js', function (err, files) {
+    files.forEach(function (file) {
+        console.log("./" + file);
+        require("./" + file)(controller);
+    });
 });
-
-var normalizedPath = require("path").join(__dirname, "skills");
-console.log("#############" + normalizedPath);
-require("fs").readdirSync(normalizedPath).forEach(function(file) {
-    console.log("./skills/" + file);
-//   require("./skills/" + file)(controller);
-});
-
 
 // This captures and evaluates any message sent to the bot as a DM
 // or sent to the bot in the form "@bot message" and passes it to
