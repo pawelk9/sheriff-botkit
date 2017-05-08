@@ -4,6 +4,8 @@ module.exports = function (controller) {
 
     controller.on('facebook_postback', function (bot, message) {
 
+        console.log(message);
+
         switch (message.payload) {
 
             case payload.MENU_SUBSCRIBE_TO_NOTIFICATIONS:
