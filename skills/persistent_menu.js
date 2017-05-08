@@ -7,7 +7,7 @@ module.exports = function (controller) {
         switch (message.payload) {
 
             case payload.MENU_SUBSCRIBE_TO_NOTIFICATIONS:
-                bot.reply(message, 'SUBSCRIBE_TO_NOTIFICATIONS');
+                bot.reply(message, 'Type license plate to subscribe');
                 break;
 
             case payload.MENU_UNSUBSCRIBE_TO_NOTIFICATIONS:
@@ -19,11 +19,12 @@ module.exports = function (controller) {
                 break;
 
             case payload.MENU_MESSAGE_DRIVER:
-                bot.reply(message, 'MESSAGE_DRIVER');
+                bot.reply(message, 'Send any message');
                 break;
 
             case payload.MENU_GET_HELP:
                 bot.reply(message, 'GET_HELP');
+                controller.trigger('menu_help', [bot, message]);
                 break;
         }
     });

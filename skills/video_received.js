@@ -1,5 +1,3 @@
-const addMore = require('./../messages/add_more');
-
 module.exports = function (controller) {
 
     controller.on('video_received', function (bot, message) {
