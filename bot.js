@@ -17,6 +17,7 @@ This is a sample Facebook bot built with Botkit.
 
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+var glob = require('glob');  
 var env = require('node-env-file');
 env(__dirname + '/.env');
 
@@ -63,6 +64,9 @@ require(__dirname + '/components/onboarding.js')(controller);
 // Enable Dashbot.io plugin
 require(__dirname + '/components/plugin_dashbot.js')(controller);
 
+glob(normalizedPath + '/**/*.js', function( err, files ) {
+  console.log(files);
+});
 var normalizedPath = require("path").join(__dirname, "skills");
 console.log("#############" + normalizedPath);
 require("fs").readdirSync(normalizedPath).forEach(function(file) {
