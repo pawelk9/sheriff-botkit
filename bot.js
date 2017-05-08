@@ -64,7 +64,9 @@ require(__dirname + '/components/onboarding.js')(controller);
 require(__dirname + '/components/plugin_dashbot.js')(controller);
 
 var normalizedPath = require("path").join(__dirname, "skills");
+console.log("#############" + normalizedPath);
 require("fs").readdirSync(normalizedPath).forEach(function(file) {
+    console.log("./skills/" + file);
   require("./skills/" + file)(controller);
 });
 
