@@ -1,4 +1,4 @@
-const payload = require('./../consts/payloads');
+const payload = require('./../../consts/payloads');
 
 module.exports = function (controller) {
 
