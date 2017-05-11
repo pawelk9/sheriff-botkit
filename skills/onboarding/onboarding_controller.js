@@ -8,12 +8,12 @@ module.exports = function (controller) {
 
         switch (message.payload) {
 
-            case payload.GET_STARTED:
-                bot.reply(message, 'Welcome message');
-                bot.reply(message, {
-                    attachment: receiveNotifications
-                });
-                break;
+            // case payload.GET_STARTED:
+            //     bot.reply(message, 'Welcome message');
+            //     bot.reply(message, {
+            //         attachment: receiveNotifications
+            //     });
+            //     break;
 
             case payload.RECEIVE_NOTIFICATIONS_YES:
                 bot.reply(message, 'Store in DB');
