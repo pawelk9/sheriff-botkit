@@ -1,5 +1,5 @@
 const payload = require('./../../consts/payloads');
-const receiveNotifications = require('./../../messages/receive_notifications');
+
 const messageDriver = require('./../../messages/message_driver');
 
 module.exports = function (controller) {
@@ -8,27 +8,20 @@ module.exports = function (controller) {
 
         switch (message.payload) {
 
-            // case payload.GET_STARTED:
-            //     bot.reply(message, 'Welcome message');
+            // case payload.RECEIVE_NOTIFICATIONS_YES:
+            //     bot.reply(message, 'Store in DB');
+            //     bot.reply(message, "Yes message");
             //     bot.reply(message, {
-            //         attachment: receiveNotifications
+            //         attachment: messageDriver
             //     });
             //     break;
 
-            case payload.RECEIVE_NOTIFICATIONS_YES:
-                bot.reply(message, 'Store in DB');
-                bot.reply(message, "Yes message");
-                bot.reply(message, {
-                    attachment: messageDriver
-                });
-                break;
-
-            case payload.RECEIVE_NOTIFICATIONS_NO:
-                bot.reply(message, 'No message');
-                bot.reply(message, {
-                    attachment: messageDriver
-                });
-                break;
+            // case payload.RECEIVE_NOTIFICATIONS_NO:
+            //     bot.reply(message, 'No message');
+            //     bot.reply(message, {
+            //         attachment: messageDriver
+            //     });
+            //     break;
 
             case payload.MESSAGE_DRIVER_YES:
                 bot.reply(message, "Alright, send me anything :)");
