@@ -1,12 +1,18 @@
 const payload = require('./../../consts/payloads');
+const messageDriver = require('./../../messages/message_driver');
 
-module.exports = function (controller) {
-    controller.hears([payload.RECEIVE_NOTIFICATIONS_YES], 'facebook_postback', function (bot, message) {
-        bot.reply(message, 'Store in DB');
-        bot.reply(message, "Yes message");
+module.exports = (controller) => {
+    controller.hears([payload.MESSAGE_DRIVER_YES], 'facebook_postback', function (bot, message) {
+        bot.reply(message, "Subscribed message");
+        bot.reply(message, {
+            attachment: messageDriver
+        });
     });
 
-    controller.hears([payload.RECEIVE_NOTIFICATIONS_NO], 'facebook_postback', function (bot, message) {
+    controller.hears([payload.MESSAGE_DRIVER_NO], 'facebook_postback', function (bot, message) {
         bot.reply(message, 'No message');
+        bot.reply(message, {
+            attachment: messageDriver
+        });
     });
 }
