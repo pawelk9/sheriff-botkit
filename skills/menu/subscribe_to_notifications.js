@@ -1,6 +1,7 @@
-module.exports = function (controller) {
+const payload = require('./../../consts/payloads');
 
-    controller.on('subscribe_to_notifications', function (bot, message) {
-        bot.reply(message, 'subscribe_to_notifications');
+module.exports = (controller) => {
+    controller.hears([payload.MENU_SUBSCRIBE_TO_NOTIFICATIONS], 'facebook_postback', function (bot, message) {
+        bot.reply(message, 'MENU_SUBSCRIBE_TO_NOTIFICATIONS');
     });
-};
+}

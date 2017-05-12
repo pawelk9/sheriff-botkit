@@ -1,6 +1,7 @@
-module.exports = function (controller) {
+const payload = require('./../../consts/payloads');
 
-    controller.on('menu_help', function (bot, message) {
-        bot.reply(message, 'Pomocy kokocy dupocy!');
+module.exports = (controller) => {
+    controller.hears([payload.MENU_GET_HELP], 'facebook_postback', function (bot, message) {
+        bot.reply(message, 'Help?');
     });
-};
+}

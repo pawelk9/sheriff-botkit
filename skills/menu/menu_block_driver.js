@@ -1,5 +1,7 @@
-module.exports = function (controller) {
-    controller.on('menu_block_driver', function (bot, message) {
+const payload = require('./../../consts/payloads');
+
+module.exports = (controller) => {
+    controller.hears([payload.MENU_BLOCK_DRIVER], 'facebook_postback', function (bot, message) {
         bot.reply(message, 'Block driver');
     });
-};
+}
