@@ -1,4 +1,4 @@
-module.exports = function (controller) {
+module.exports = (controller) => {
 
     controller.on('text_received', function (bot, message) {
         bot.reply(message, 'Nice text dude!');

@@ -1,4 +1,4 @@
-module.exports = function (controller) {
+module.exports = (controller) => {
 
     controller.on('message_received', function (bot, message) {
         console.log(message);
