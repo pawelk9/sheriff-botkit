@@ -5,22 +5,22 @@ module.exports = (controller) => {
     controller.hears([payload.MENU_SUBSCRIBE_TO_NOTIFICATIONS], 'facebook_postback', function (bot, message) {
 
         bot.createConversation(message, function (err, convo) {
-
             convo.addMessage({
-                text: 'You said yes! How wonderful.',
+                text: 'Super! Podaj swoją tablicę rejestracyjną.',
             }, 'yes_thread');
 
             convo.addMessage({
-                text: 'You said no, that is too bad.',
+                text: 'Spoko. Możesz zapisać się w każdej chwili w menu.',
             }, 'no_thread');
 
             convo.addMessage({
-                text: 'Sorry I did not understand.',
+                text: 'Nie zrozumiałem. Naciśnij tak albo nie :)',
                 action: 'default',
             }, 'bad_response');
 
-            // Create a yes/no question in the default thread...
-            convo.addQuestion({attachment: receiveNotifications}, [{
+            convo.addQuestion({
+                attachment: receiveNotifications
+            }, [{
                     pattern: payload.RECEIVE_NOTIFICATIONS_YES,
                     callback: function (response, convo) {
                         console.log("###########", response)
@@ -43,6 +43,5 @@ module.exports = (controller) => {
 
             convo.activate();
         });
-
     });
 }
