@@ -16,7 +16,9 @@ module.exports = (controller) => {
                 {
                     default: true,
                     callback: function (response, convo) {
-                        convo.gotoThread('bad_response');
+                        convo.say("Nie mogę rozponać tablicy. Upewnij się, że jest w formacie XX XXXXX lub XXX XXXX.");
+                        convo.say("Spróbuj ponownie");
+                        convo.repeat();
                     },
                 }
             ]);
