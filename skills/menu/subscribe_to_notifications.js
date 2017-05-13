@@ -25,7 +25,7 @@ module.exports = (controller) => {
             }, 'bad_response');
 
             // Create a yes/no question in the default thread...
-            convo.addQuestion(receiveNotifications, [{
+            convo.addQuestion({attachment: receiveNotifications}, [{
                     pattern: 'yes',
                     callback: function (response, convo) {
                         convo.gotoThread('yes_thread');
