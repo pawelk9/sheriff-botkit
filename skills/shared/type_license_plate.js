@@ -6,6 +6,11 @@ module.exports = (controller) => {
                 text: "Zapisane! Wyślę do Ciebie wiadomość jak tylko coś dostanę :)",
             }, "valid_license_plate");
 
+            convo.addMessage({
+                text: "Nie mogę rozponać tablicy. Wpisz w formacie XX XXXXX lub XXX XXXX.",
+                action: "default",
+            },"bad_response");
+
             convo.ask("Super! Podaj swoją tablicę rejestracyjną", [{
                     pattern: bot.utterances.yes,
                     callback: function (response, convo) {
@@ -16,9 +21,7 @@ module.exports = (controller) => {
                 {
                     default: true,
                     callback: function (response, convo) {
-                        convo.say("Nie mogę rozponać tablicy. Upewnij się, że jest w formacie XX XXXXX lub XXX XXXX.");
-                        convo.say("Spróbuj ponownie");
-                        convo.repeat();
+                        convo.gotoThread("bad_response");
                     },
                 }
             ]);
