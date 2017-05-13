@@ -1,9 +1,9 @@
-const payload = require('./../../consts/payloads');
 const receiveNotifications = require('./../../messages/receive_notifications');
+const payload = require('./../../consts/payloads');
 
 module.exports = (controller) => {
-    controller.hears([payload.MENU_SUBSCRIBE_TO_NOTIFICATIONS], 'facebook_postback', function (bot, message) {
-
+    controller.on('subscribe_to_notifications', function (bot, message) {
+        
         bot.createConversation(message, function (err, convo) {
             convo.addMessage({
                 text: 'Super! Podaj swoją tablicę rejestracyjną.',
@@ -44,4 +44,4 @@ module.exports = (controller) => {
             convo.activate();
         });
     });
-}
+};
