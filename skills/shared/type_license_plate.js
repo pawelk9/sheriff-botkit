@@ -2,8 +2,6 @@ module.exports = (controller) => {
     controller.on('type_license_plate', function (bot, message) {
 
         bot.createConversation(message, function (err, convo) {
-            convo.activate();
-
             convo.sayFirst("Super!");
 
             convo.addQuestion("Podaj swoją tablicę rejestracyjną", [{
@@ -23,6 +21,8 @@ module.exports = (controller) => {
                     },
                 }
             ], {}, "default");
+
+            convo.activate();
 
             convo.on('end', function (convo) {
                 if (convo.status == 'completed') {
