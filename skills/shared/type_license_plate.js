@@ -8,8 +8,8 @@ module.exports = (controller) => {
             convo.addQuestion("Podaj swoją tablicę rejestracyjną", [{
                     pattern: bot.utterances.yes,
                     callback: function (response, convo) {
-                        convo.say("Super. Zapisuję...");
-                        convo.say("Zapisane! Wyślę do Ciebie wiadomość jak tylko coś dostanę :)");
+                        convo.say("Super. Już zapisuję!");
+                        bot.replyWithTyping(message, "Zapisane! Wyślę do Ciebie wiadomość jak tylko coś dostanę :)");
                         convo.next();
                     },
                 },
@@ -17,6 +17,7 @@ module.exports = (controller) => {
                     default: true,
                     callback: function (response, convo) {
                         convo.say("Nie mogę rozponać tablicy. Wpisz w formacie XX XXXXX lub XXX XXXX.");
+                        convo.repeat();
                         convo.next();
                     },
                 }
