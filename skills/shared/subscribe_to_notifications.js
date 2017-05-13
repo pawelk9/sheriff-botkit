@@ -24,6 +24,7 @@ module.exports = (controller) => {
                     pattern: payload.RECEIVE_NOTIFICATIONS_YES,
                     callback: function (response, convo) {
                         console.log("###########", response)
+                        convo.stop();
                         controller.trigger('type_license_plate', [bot, message]);
                     },
                 },
