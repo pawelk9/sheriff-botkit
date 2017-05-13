@@ -26,13 +26,14 @@ module.exports = (controller) => {
 
             // Create a yes/no question in the default thread...
             convo.addQuestion({attachment: receiveNotifications}, [{
-                    pattern: 'yes',
+                    pattern: payload.RECEIVE_NOTIFICATIONS_YES,
                     callback: function (response, convo) {
+                        console.log("###########", response)
                         convo.gotoThread('yes_thread');
                     },
                 },
                 {
-                    pattern: 'no',
+                    pattern: payload.RECEIVE_NOTIFICATIONS_NO,
                     callback: function (response, convo) {
                         convo.gotoThread('no_thread');
                     },
