@@ -1,9 +1,13 @@
 const payload = require('./../../consts/payloads');
+const receiveNotifications = require('./../../messages/receive_notifications');
 
 module.exports = (controller) => {
     controller.hears([payload.MENU_SUBSCRIBE_TO_NOTIFICATIONS], 'facebook_postback', function (bot, message) {
         bot.reply(message, 'MENU_SUBSCRIBE_TO_NOTIFICATIONS');
 
+        // bot.reply(message, {
+        //     attachment: receiveNotifications
+        // });
 
         bot.createConversation(message, function (err, convo) {
 
@@ -21,7 +25,7 @@ module.exports = (controller) => {
             }, 'bad_response');
 
             // Create a yes/no question in the default thread...
-            convo.addQuestion('Chcesz otrzymywać powiadomienia?', [{
+            convo.addQuestion(receiveNotifications, [{
                     pattern: 'yes',
                     callback: function (response, convo) {
                         convo.gotoThread('yes_thread');
