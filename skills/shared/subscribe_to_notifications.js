@@ -3,7 +3,7 @@ const payload = require('./../../consts/payloads');
 
 module.exports = (controller) => {
     controller.on('subscribe_to_notifications', function (bot, message) {
-        
+
         bot.createConversation(message, function (err, convo) {
             convo.addMessage({
                 text: 'Super! Podaj swoją tablicę rejestracyjną.',
@@ -24,7 +24,7 @@ module.exports = (controller) => {
                     pattern: payload.RECEIVE_NOTIFICATIONS_YES,
                     callback: function (response, convo) {
                         console.log("###########", response)
-                        convo.gotoThread('yes_thread');
+                        controller.trigger('type_license_plate', [bot, message]);
                     },
                 },
                 {
