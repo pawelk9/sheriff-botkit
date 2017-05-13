@@ -19,7 +19,7 @@ module.exports = (controller) => {
             }, 'bad_response');
 
             convo.addQuestion({
-                attachment: receiveNotifications
+                attachment: receiveNotifications("Chcesz otrzymywać powiadomienia?", "Tak", "Nie")
             }, [{
                     pattern: payload.RECEIVE_NOTIFICATIONS_YES,
                     callback: function (response, convo) {
