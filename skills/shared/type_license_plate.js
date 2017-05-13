@@ -2,6 +2,7 @@ module.exports = (controller) => {
     controller.on('type_license_plate', function (bot, message) {
 
         bot.createConversation(message, function (err, convo) {
+            convo.activate();
 
             convo.sayFirst("Super!");
 
@@ -23,7 +24,15 @@ module.exports = (controller) => {
                 }
             ], {}, "default");
 
-            convo.activate();
+            convo.on('end', function (convo) {
+                if (convo.status == 'completed') {
+                    var res = convo.extractResponses();
+                    console.log(res);
+
+                } else {
+                    console.log("Something failed", convo.status)
+                }
+            });
         });
     });
 };
