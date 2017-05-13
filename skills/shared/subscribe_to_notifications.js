@@ -6,10 +6,6 @@ module.exports = (controller) => {
 
         bot.createConversation(message, function (err, convo) {
             convo.addMessage({
-                text: 'Super! Podaj swoją tablicę rejestracyjną.',
-            }, 'yes_thread');
-
-            convo.addMessage({
                 text: 'Spoko. Możesz zapisać się w każdej chwili w menu.',
             }, 'no_thread');
 
@@ -23,7 +19,6 @@ module.exports = (controller) => {
             }, [{
                     pattern: payload.RECEIVE_NOTIFICATIONS_YES,
                     callback: function (response, convo) {
-                        console.log("###########", response)
                         convo.stop();
                         controller.trigger('type_license_plate', [bot, message]);
                     },
