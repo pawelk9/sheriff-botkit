@@ -3,11 +3,6 @@ const receiveNotifications = require('./../../messages/receive_notifications');
 
 module.exports = (controller) => {
     controller.hears([payload.MENU_SUBSCRIBE_TO_NOTIFICATIONS], 'facebook_postback', function (bot, message) {
-        bot.reply(message, 'MENU_SUBSCRIBE_TO_NOTIFICATIONS');
-
-        // bot.reply(message, {
-        //     attachment: receiveNotifications
-        // });
 
         bot.createConversation(message, function (err, convo) {
 
