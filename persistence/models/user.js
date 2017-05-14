@@ -3,7 +3,7 @@ const Schema = mongoose.Schema;
 
 // create a schema
 var userSchema = new Schema({
-  messangerId: String,
+  messangerId: { type: String, required: true, unique: true },
   created_at: Date,
   updated_at: Date
 });

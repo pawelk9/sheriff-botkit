@@ -5,7 +5,7 @@ module.exports = (controller) => {
     controller.hears([payload.GET_STARTED], 'facebook_postback', function (bot, message) {
         bot.startConversation(message, function (err, convo) {
             var user = new User({
-                messangerId: message.User
+                messangerId: message.user
             });
             user.save(function (err) {
                 if (err) throw err;
