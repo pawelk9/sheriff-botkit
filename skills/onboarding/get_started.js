@@ -7,10 +7,9 @@ module.exports = (controller) => {
     controller.hears([payload.GET_STARTED], 'facebook_postback', function (bot, message) {
         bot.startConversation(message, function (err, convo) {
 
-            let user;
             rp(getUserProfile(message.user)).then(function (body) {
                     console.log('###', body);
-                    user = new User({
+                    let user = new User({
                         messangerId: message.user,
                         first_name: body.first_name,
                         last_name: body.last_name,
@@ -19,20 +18,26 @@ module.exports = (controller) => {
                         timezone: body.timezone,
                         gender: body.gender
                     });
+
+                    user.save(function (err) {
+                        if (err) {
+                            console.log(err);
+                        };
+                        console.log('User saved successfully!');
+                    });
                 })
                 .catch(function (err) {
                     console.log(err);
-                    user = new User({
+                    let user = new User({
                         messangerId: message.user
                     });
+                    user.save(function (err) {
+                        if (err) {
+                            console.log(err);
+                        };
+                        console.log('User saved successfully!');
+                    });
                 });
-
-            user.save(function (err) {
-                if (err) {
-                    console.log(err);
-                };
-                console.log('User saved successfully!');
-            });
 
             convo.say("Cześć! Jestem Szeryf!");
             controller.trigger('subscribe_to_notifications', [bot, message]);
