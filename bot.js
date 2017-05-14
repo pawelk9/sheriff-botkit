@@ -72,7 +72,7 @@ glob('skills/**/*.js', function (err, files) {
     });
 });
 
-var lol = require("./persistence/db");
+require("./persistence/db");
 
 // This captures and evaluates any message sent to the bot as a DM
 // or sent to the bot in the form "@bot message" and passes it to
