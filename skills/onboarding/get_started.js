@@ -8,7 +8,9 @@ module.exports = (controller) => {
                 messangerId: message.user
             });
             user.save(function (err) {
-                if (err) throw err;
+                if (err) {
+                    console.log(err);
+                };
                 console.log('User saved successfully!');
             });
             convo.say("Cześć! Jestem Szeryf!");
