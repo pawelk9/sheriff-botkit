@@ -1,3 +1,5 @@
+const request = require('request');
+
 module.exports = (messangerId) => {
     request({
         uri: "https://graph.facebook.com/v2.6/" + messangerId,
