@@ -4,11 +4,10 @@ const getUserProfile = require('./../../api/user_profile_api');
 const rp = require('request-promise');
 
 module.exports = (controller) => {
-    controller.hears([payload.GET_STARTED], 'facebook_postback', function (bot, message) {
-        bot.startConversation(message, function (err, convo) {
+    controller.hears([payload.GET_STARTED], 'facebook_postback', (bot, message) => {
+        bot.startConversation(message, (err, convo) => {
 
-            rp(getUserProfile(message.user)).then(function (body) {
-                    console.log('###', body);
+            rp(getUserProfile(message.user)).then((body) => {
                     let user = new User({
                         messangerId: message.user,
                         first_name: body.first_name,
@@ -19,23 +18,23 @@ module.exports = (controller) => {
                         gender: body.gender
                     });
 
-                    user.save(function (err) {
+                    user.save((err) => {
                         if (err) {
                             console.log(err);
+                            return;
                         };
-                        console.log('User saved successfully!');
                     });
                 })
-                .catch(function (err) {
+                .catch((err) => {
                     console.log(err);
                     let user = new User({
                         messangerId: message.user
                     });
-                    user.save(function (err) {
+                    user.save((err) => {
                         if (err) {
                             console.log(err);
+                            return;
                         };
-                        console.log('User saved successfully!');
                     });
                 });
 
