@@ -1,7 +1,5 @@
 {
   "db": {
-      "host": "ds137191.mlab.com:3719",
-      "username": "oawel",
-      "password": "jowjow"
+      "host": "mongodb://pawel:jowjow@ds137191.mlab.com:37191/heroku_j6lp98qg"
   }
 }
