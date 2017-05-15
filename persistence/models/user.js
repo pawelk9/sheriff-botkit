@@ -28,18 +28,10 @@ userSchema.pre('save', function (next) {
   next();
 });
 
-userSchema.statics.alreadyRegistered = function (userId) {
-  console.log("DUPAAAAA");
-  console.log(this);
+userSchema.statics.alreadyRegistered = function (userId, cb) {
   this.count({
     messangerId: userId
-  }, function (err, count) {
-    console.log(count);
-    if (count > 0) {
-      return true;
-    }
-    return false;
-  });
+  }, cb);
 };
 
 const User = mongoose.model('User', userSchema);
