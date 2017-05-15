@@ -29,9 +29,12 @@ userSchema.pre('save', function (next) {
 });
 
 userSchema.statics.alreadyRegistered = function (userId) {
+  console.log("DUPAAAAA");
+  console.log(this);
   this.count({
     messangerId: userId
   }, function (err, count) {
+    console.log(count);
     if (count > 0) {
       return true;
     }
