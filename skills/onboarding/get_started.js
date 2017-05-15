@@ -7,7 +7,7 @@ module.exports = (controller) => {
     controller.hears([payload.GET_STARTED], 'facebook_postback', (bot, message) => {
         bot.startConversation(message, (err, convo) => {
             User.count({
-                messangerId: message.User
+                messangerId: message.user
             }, function (err, count) {
                 if (count > 0) {
                     console.log("USER EXISTS!!!!!!!!!");
