@@ -6,6 +6,13 @@ const rp = require('request-promise');
 module.exports = (controller) => {
     controller.hears([payload.GET_STARTED], 'facebook_postback', (bot, message) => {
         bot.startConversation(message, (err, convo) => {
+            User.count({
+                _id: message.User
+            }, function (err, count) {
+                if (count > 0) {
+                    console.log("USER EXISTS!!!!!!!!!");
+                }
+            });
 
             rp(getUserProfile(message.user)).then((body) => {
                     let user = new User({
