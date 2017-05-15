@@ -2,7 +2,11 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const userSchema = new Schema({
-  messangerId: { type: String, required: true, unique: true },
+  messangerId: {
+    type: String,
+    required: true,
+    unique: true
+  },
   first_name: String,
   last_name: String,
   profile_pic: String,
@@ -13,7 +17,7 @@ const userSchema = new Schema({
   updated_at: Date
 });
 
-userSchema.pre('save', (next) => {
+userSchema.pre('save', function (next) {
   const currentDate = new Date();
 
   this.updated_at = currentDate;
