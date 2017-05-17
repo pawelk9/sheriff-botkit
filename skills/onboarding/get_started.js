@@ -7,46 +7,49 @@ module.exports = (controller) => {
     controller.hears([payload.GET_STARTED], 'facebook_postback', (bot, message) => {
         bot.startConversation(message, (err, convo) => {
 
-            var promise = User.count({messangerId: message.user}).exec();
+            var promise = User.count({
+                messangerId: message.user
+            }).exec();
 
             promise.then(count => {
-                console.log("DUPECZKA", count);
-            });
-            
+                    if (count > 0) {
+                        convo.say("Witaj ponownie!");
+                    } else {
+                        rp(getUserProfile(message.user)).then((body) => {
+                                let user = new User({
+                                    messangerId: message.user,
+                                    first_name: body.first_name,
+                                    last_name: body.last_name,
+                                    profile_pic: body.profile_pic,
+                                    locale: body.locale,
+                                    timezone: body.timezone,
+                                    gender: body.gender
+                                });
 
-            rp(getUserProfile(message.user)).then((body) => {
-                    let user = new User({
-                        messangerId: message.user,
-                        first_name: body.first_name,
-                        last_name: body.last_name,
-                        profile_pic: body.profile_pic,
-                        locale: body.locale,
-                        timezone: body.timezone,
-                        gender: body.gender
-                    });
-
-                    user.save((err) => {
-                        if (err) {
-                            console.log(err);
-                            return;
-                        };
-                    });
+                                user.save((err) => {
+                                    if (err) {
+                                        console.log(err);
+                                        return;
+                                    };
+                                });
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                                let user = new User({
+                                    messangerId: message.user
+                                });
+                                user.save((err) => {
+                                    if (err) {
+                                        console.log(err);
+                                        return;
+                                    };
+                                });
+                            });
+                        convo.say("Cześć! Jestem Szeryf!");
+                        controller.trigger('subscribe_to_notifications', [bot, message]);
+                    }
                 })
-                .catch((err) => {
-                    console.log(err);
-                    let user = new User({
-                        messangerId: message.user
-                    });
-                    user.save((err) => {
-                        if (err) {
-                            console.log(err);
-                            return;
-                        };
-                    });
-                });
-
-            convo.say("Cześć! Jestem Szeryf!");
-            controller.trigger('subscribe_to_notifications', [bot, message]);
+                .catch();
         });
     });
 }
