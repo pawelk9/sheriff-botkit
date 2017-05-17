@@ -28,5 +28,19 @@ userSchema.pre('save', function (next) {
   next();
 });
 
+userSchema.statics.alreadyRegistered = function (userId) {
+  const promise = this.count({
+    messangerId: userId
+  }).exec();
+
+  promise.then(count => {
+    if(count > 0) {
+      console.log("DUPA JEST");
+    } else {
+      console.log("DUPA NIE MA");
+    }
+  });
+};
+
 const User = mongoose.model('User', userSchema);
 module.exports = User;
