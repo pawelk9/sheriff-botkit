@@ -34,11 +34,13 @@ userSchema.statics.alreadyRegistered = function (userId) {
   }).exec();
 
   promise.then(count => {
-    if(count > 0) {
-      console.log("DUPA JEST");
-    } else {
-      console.log("DUPA NIE MA");
-    }
+    return new Promise((resolve, reject) => {
+      if (count > 0) {
+        resolve(true)
+      } else {
+        reject(false)
+      }
+    });
   });
 };
 
