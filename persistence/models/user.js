@@ -36,11 +36,11 @@ userSchema.statics.alreadyRegistered = function (userId) {
 
   promise.then(count => {
     console.log(Promise);
-    return new Promise((resolve, reject) => {
+    new Promise((resolve, reject) => {
       if (count > 0) {
-        resolve(true)
+        return resolve(true)
       } else {
-        reject(false)
+        return reject(false)
       }
     });
   });
