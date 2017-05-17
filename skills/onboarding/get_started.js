@@ -8,7 +8,7 @@ module.exports = (controller) => {
         bot.startConversation(message, (err, convo) => {
 
             const isUserRegistered = User.alreadyRegistered(message.user);
-
+            console.log(isUserRegistered);
             if (isUserRegistered) {
                 console.log("mamy starego");
             } else {
