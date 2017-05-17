@@ -6,14 +6,13 @@ const rp = require('request-promise');
 module.exports = (controller) => {
     controller.hears([payload.GET_STARTED], 'facebook_postback', (bot, message) => {
         bot.startConversation(message, (err, convo) => {
-            User.alreadyRegistered(message.user, function (err, count) {
-                if (count > 0) {
-                    console.log("ISTNIEJE!!")
-                    return true;
-                }
-                console.log("NIE MA!!")
-                return false;
+
+            var promise = User.count({messangerId: message.user}).exec();
+
+            promise.then(count => {
+                console.log("DUPECZKA", count);
             });
+            
 
             rp(getUserProfile(message.user)).then((body) => {
                     let user = new User({

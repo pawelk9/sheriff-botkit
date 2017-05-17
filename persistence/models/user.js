@@ -28,11 +28,5 @@ userSchema.pre('save', function (next) {
   next();
 });
 
-userSchema.statics.alreadyRegistered = function (userId, cb) {
-  this.count({
-    messangerId: userId
-  }, cb);
-};
-
 const User = mongoose.model('User', userSchema);
 module.exports = User;
