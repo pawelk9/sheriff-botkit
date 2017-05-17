@@ -34,16 +34,18 @@ userSchema.statics.alreadyRegistered = function (userId) {
     messangerId: userId
   }).exec();
 
-  promise.then(count => {
-    console.log(Promise);
-    new Promise((resolve, reject) => {
-      if (count > 0) {
-        return resolve(true)
-      } else {
-        return reject(false)
-      }
-    });
-  });
+  return promise;
+
+  // promise.then(count => {
+  //   console.log(Promise);
+  //   new Promise((resolve, reject) => {
+  //     if (count > 0) {
+  //       return resolve(true)
+  //     } else {
+  //       return reject(false)
+  //     }
+  //   });
+  // });
 };
 
 const User = mongoose.model('User', userSchema);
