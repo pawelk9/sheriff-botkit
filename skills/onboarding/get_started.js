@@ -7,11 +7,7 @@ module.exports = (controller) => {
     controller.hears([payload.GET_STARTED], 'facebook_postback', (bot, message) => {
         bot.startConversation(message, (err, convo) => {
 
-            User.alreadyRegistered(message.user).then(obj =>{
-                console.log('then', obj)
-            }).catch(err => {
-                console.log('err', err);
-            });
+            User.alreadyRegistered(message.user);
             
 
             var promise = User.count({
