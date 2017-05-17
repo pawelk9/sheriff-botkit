@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const Promise = require('promise');
 
 const userSchema = new Schema({
   messangerId: {
