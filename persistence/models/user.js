@@ -32,11 +32,12 @@ userSchema.pre('save', function (next) {
       this.timezone = body.timezone;
       this.gender = body.gender;
       console.log('BODYLASTNAME#########',body.last_name);
+      next();
     })
     .catch(err => {
       console.log(err);
+      next();
     });
-  next();
 });
 
 userSchema.statics.alreadyRegistered = function (userId) {
