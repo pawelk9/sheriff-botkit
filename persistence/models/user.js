@@ -34,8 +34,11 @@ userSchema.statics.alreadyRegistered = function (userId) {
     messangerId: userId
   }).exec();
 
+  console.log('typeof', typeof promise);
+
   promise.then(count => {
     if (count > 0) {
+      console.log("zwroc true");
       return true
     } else {
       return false
