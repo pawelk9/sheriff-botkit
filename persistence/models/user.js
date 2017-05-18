@@ -22,7 +22,7 @@ const userSchema = new Schema({
 });
 
 userSchema.pre('save', function (next) {
-
+  console.log('messangerId',this.messangerId)
   rp(getUserProfile(this.messangerId))
     .then(body => {
       this.first_name = body.first_name;
