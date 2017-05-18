@@ -32,11 +32,7 @@ userSchema.pre('save', function (next) {
 userSchema.statics.alreadyRegistered = function (userId) {
   const promise = this.count({
     messangerId: userId
-  }).exec();
-
-  console.log('typeof', typeof promise);
-
-  promise.then(count => {
+  }).exec().then(count => {
     if (count > 0) {
       console.log("zwroc true");
       return true
@@ -44,6 +40,9 @@ userSchema.statics.alreadyRegistered = function (userId) {
       return false
     }
   });
+
+  console.log('typeof', typeof promise);
+
 };
 
 const User = mongoose.model('User', userSchema);
