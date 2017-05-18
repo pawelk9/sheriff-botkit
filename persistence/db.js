@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const config = require('config');
 
+mongoose.Promise = global.Promise
+
 const dbURI = config.get('db.host');
 
 mongoose.connect(dbURI);
