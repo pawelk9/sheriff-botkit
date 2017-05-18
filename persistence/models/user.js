@@ -1,5 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
+const getUserProfile = require('./../../api/user_profile_api');
+const rp = require('request-promise');
 
 const userSchema = new Schema({
   messangerId: {
@@ -17,6 +19,12 @@ const userSchema = new Schema({
     type: Date,
     default: Date.now
   }
+});
+
+userSchema.pre('save', next => {
+  console.log(this);
+
+  next();
 });
 
 userSchema.statics.alreadyRegistered = function (userId) {
