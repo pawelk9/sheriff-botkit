@@ -7,27 +7,29 @@ module.exports = (controller) => {
     controller.hears([payload.GET_STARTED], 'facebook_postback', (bot, message) => {
         bot.startConversation(message, (err, convo) => {
 
-            // User.alreadyRegistered(message.user).then(obj => {
-            //     console.log('then', obj)
-            // }).catch(err => {
-            //     console.log('err', err);
-            // });
-
-            const promise2 = User.count({
-                messangerId: message.user
-            }).exec();
-
-            promise2.then(count => {
-                if (count > 0) {
-                    return true
-                } else {
-                    return false
-                }
-            }).then(obj => {
+            var test = User.alreadyRegistered(message.user);
+            console.log(typeof test);
+            User.alreadyRegistered(message.user).then(obj => {
                 console.log('then', obj)
             }).catch(err => {
                 console.log('err', err);
             });
+
+            // const promise2 = User.count({
+            //     messangerId: message.user
+            // }).exec();
+
+            // promise2.then(count => {
+            //     if (count > 0) {
+            //         return true
+            //     } else {
+            //         return false
+            //     }
+            // }).then(obj => {
+            //     console.log('then', obj)
+            // }).catch(err => {
+            //     console.log('err', err);
+            // });
 
             var promise = User.count({
                 messangerId: message.user
