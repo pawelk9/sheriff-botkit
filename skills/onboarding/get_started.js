@@ -12,26 +12,11 @@ module.exports = (controller) => {
                     convo.say("Witaj ponownie!");
                 })
                 .catch(() => {
-                    rp(getUserProfile(message.user))
-                        .then(body => {
-                            let user = new User({
-                                messangerId: message.user,
-                                first_name: body.first_name,
-                                last_name: body.last_name,
-                                profile_pic: body.profile_pic,
-                                locale: body.locale,
-                                timezone: body.timezone,
-                                gender: body.gender
-                            });
-                            user.save().then(() => {}).catch(() => {});
-                        })
-                        .catch(err => {
-                            console.log(err);
-                            let user = new User({
-                                messangerId: message.user
-                            });
-                            user.save().then(() => {}).catch(() => {});
-                        });
+                    const user = new User({
+                        messangerId: message.user,
+                    });
+                    user.save().then(() => {}).catch(() => {});
+
                     convo.say("Cześć! Jestem Szeryf!");
                     controller.trigger('subscribe_to_notifications', [bot, message]);
                 });
