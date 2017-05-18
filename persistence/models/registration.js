@@ -7,11 +7,11 @@ const registrationSchema = new Schema({
         required: true,
         unique: true
     },
-    users: [{
+    owners: {
         type: Schema.Types.ObjectId,
         ref: 'Users',
         required: true
-    }]
+    }
 });
 
 module.exports = mongoose.model('Registration', registrationSchema);
