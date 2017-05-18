@@ -30,9 +30,7 @@ userSchema.pre('save', function (next) {
 });
 
 userSchema.statics.alreadyRegistered = function (userId) {
-
   return new Promise((resolve, reject) => {
-
     const countUsers = this.count({
       messangerId: userId
     }).exec();
@@ -43,19 +41,7 @@ userSchema.statics.alreadyRegistered = function (userId) {
       }
       reject(false);
     })
-
   });
-  // const promise = this.count({
-  //   messangerId: userId
-  // }).exec().then(count => {
-  //   if (count > 0) {
-  //     console.log("zwroc true");
-  //     return true;
-  //   }
-  //   return false;
-  // });
-  // console.log('typeof', typeof promise);
-
 };
 
 const User = mongoose.model('User', userSchema);
