@@ -25,7 +25,7 @@ module.exports = (controller) => {
             const currentUser = User.findOne({
               messangerId: message.user
             }, function (err, obj) {
-              logger.debug(obj);
+              logger.debug(obj._id);
             });
             // const registration = new Registration({
             //     license_plate: "GD18009",
