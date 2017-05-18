@@ -30,18 +30,21 @@ userSchema.pre('save', function (next) {
 });
 
 userSchema.statics.alreadyRegistered = function (userId) {
-  const promise = this.count({
-    messangerId: userId
-  }).exec().then(count => {
-    if (count > 0) {
-      console.log("zwroc true");
-      return true
-    } else {
-      return false
-    }
-  });
 
-  console.log('typeof', typeof promise);
+  return new Promise((resolve, reject) => {
+    resolve(true);
+
+  });
+  // const promise = this.count({
+  //   messangerId: userId
+  // }).exec().then(count => {
+  //   if (count > 0) {
+  //     console.log("zwroc true");
+  //     return true;
+  //   }
+  //   return false;
+  // });
+  // console.log('typeof', typeof promise);
 
 };
 

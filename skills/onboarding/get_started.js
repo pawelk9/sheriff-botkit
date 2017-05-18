@@ -6,12 +6,10 @@ const rp = require('request-promise');
 module.exports = (controller) => {
     controller.hears([payload.GET_STARTED], 'facebook_postback', (bot, message) => {
         bot.startConversation(message, (err, convo) => {
-            
+
             User.alreadyRegistered(message.user).then(obj => {
-                console.log('then', obj)
-            }).catch(err => {
-                console.log('err', err);
-            });
+                console.log('alreadyRegistered', obj);
+            })
 
             // const promise2 = User.count({
             //     messangerId: message.user
