@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-const Promise = require('promise');
 
 const userSchema = new Schema({
   messangerId: {
@@ -14,19 +13,10 @@ const userSchema = new Schema({
   locale: String,
   timezone: Number,
   gender: String,
-  created_at: Date,
-  updated_at: Date
-});
-
-userSchema.pre('save', function (next) {
-  const currentDate = new Date();
-
-  this.updated_at = currentDate;
-
-  if (!this.created_at)
-    this.created_at = currentDate;
-
-  next();
+  created_at: {
+    type: Date,
+    default: Date.now
+  }
 });
 
 userSchema.statics.alreadyRegistered = function (userId) {
