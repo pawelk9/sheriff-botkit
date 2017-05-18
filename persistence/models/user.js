@@ -32,7 +32,17 @@ userSchema.pre('save', function (next) {
 userSchema.statics.alreadyRegistered = function (userId) {
 
   return new Promise((resolve, reject) => {
-    resolve(true);
+
+    const countUsers = this.count({
+      messangerId: userId
+    }).exec();
+
+    countUsers.then(count => {
+      if (count > 0) {
+        resolve(true);
+      }
+      reject(false);
+    })
 
   });
   // const promise = this.count({
