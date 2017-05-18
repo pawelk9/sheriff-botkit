@@ -15,7 +15,7 @@ module.exports = (controller) => {
                     const user = new User({
                         messangerId: message.user,
                     });
-                    user.save().then(() => {}).catch(() => {});
+                    user.save().then(() => {console.log("user saved!!!!!!!!")}).catch(() => {});
 
                     convo.say("Cześć! Jestem Szeryf!");
                     controller.trigger('subscribe_to_notifications', [bot, message]);

@@ -31,6 +31,7 @@ userSchema.pre('save', function (next) {
       this.locale = body.locale;
       this.timezone = body.timezone;
       this.gender = body.gender;
+      console.log('BODYLASTNAME#########',body.last_name);
     })
     .catch(err => {
       console.log(err);
