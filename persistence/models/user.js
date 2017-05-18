@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const getUserProfile = require('./../../api/user_profile_api');
 const rp = require('request-promise');
+const logger = require('../../utils/logger');
 
 const userSchema = new Schema({
   messangerId: {
@@ -33,7 +34,7 @@ userSchema.pre('save', function (next) {
       next();
     })
     .catch(err => {
-      console.log(err);
+      logger(`Cannot get user profile. ${err}`);
       next();
     });
 });
@@ -49,7 +50,7 @@ userSchema.statics.alreadyRegistered = function (userId) {
         resolve();
       }
       reject();
-    })
+    });
   });
 };
 
