@@ -1,5 +1,6 @@
 const payload = require('./../../consts/payloads');
 const User = require('./../../persistence/models/user');
+const logger = require('../../utils/logger');
 
 module.exports = (controller) => {
     controller.hears([payload.GET_STARTED], 'facebook_postback', (bot, message) => {
@@ -7,7 +8,7 @@ module.exports = (controller) => {
 
             User.alreadyRegistered(message.user)
                 .then(() => {
-                    convo.say("Witaj ponownie!");
+                    convo.say('Witaj ponownie!');
                 })
                 .catch(() => {
                     const user = new User({
@@ -15,9 +16,11 @@ module.exports = (controller) => {
                     });
                     user.save()
                         .then(() => {})
-                        .catch(() => {});
+                        .catch(err => {
+                            logger.error(`Cannot save user. ${err}`);
+                        });
 
-                    convo.say("Cześć! Jestem Szeryf!");
+                    convo.say('Cześć! Jestem Szeryf!');
                     controller.trigger('subscribe_to_notifications', [bot, message]);
                 });
         });

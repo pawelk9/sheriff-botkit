@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const config = require('config');
 const logger = require('../utils/logger');
 
-mongoose.Promise = global.Promise
+mongoose.Promise = global.Promise;
 
 const dbURI = config.get('db.host');
 
