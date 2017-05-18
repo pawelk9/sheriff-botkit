@@ -6,9 +6,7 @@ const rp = require('request-promise');
 module.exports = (controller) => {
     controller.hears([payload.GET_STARTED], 'facebook_postback', (bot, message) => {
         bot.startConversation(message, (err, convo) => {
-
-            var test = User.alreadyRegistered(message.user);
-            console.log(typeof test);
+            
             User.alreadyRegistered(message.user).then(obj => {
                 console.log('then', obj)
             }).catch(err => {
