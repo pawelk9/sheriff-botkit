@@ -37,9 +37,9 @@ userSchema.statics.alreadyRegistered = function (userId) {
 
     countUsers.then(count => {
       if (count > 0) {
-        resolve(true);
+        resolve();
       }
-      reject(false);
+      reject();
     })
   });
 };

@@ -8,12 +8,12 @@ module.exports = (controller) => {
         bot.startConversation(message, (err, convo) => {
 
             User.alreadyRegistered(message.user)
-                .then(obj => {
+                .then(() => {
                     convo.say("Witaj ponownie!");
                 })
-                .catch(obj => {
+                .catch(() => {
                     rp(getUserProfile(message.user))
-                        .then((body) => {
+                        .then(body => {
                             let user = new User({
                                 messangerId: message.user,
                                 first_name: body.first_name,
