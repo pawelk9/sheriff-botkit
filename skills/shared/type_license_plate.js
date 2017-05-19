@@ -20,14 +20,14 @@ module.exports = (controller) => {
             convo.next();
           },
         }
-      ], {}, 'default');
+      ], {key: 'license_plate'}, 'default');
 
       convo.activate();
 
       convo.on('end', convo => {
         if (convo.status === 'completed') {
-          const res = convo.extractResponses();
-          logger.debug(`Extracted response: ${res}`);
+          const license_plate = convo.extractResponse('license_plate');
+          logger.debug(`Extracted response: ${license_plate}`);
         } else {
           logger.info(`License plate conversation failed. ${convo.status}`);
         }
