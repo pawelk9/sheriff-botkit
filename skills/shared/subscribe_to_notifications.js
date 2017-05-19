@@ -1,8 +1,5 @@
 const receiveNotifications = require('./../../messages/receive_notifications');
 const payload = require('./../../consts/payloads');
-const Registration = require('./../../persistence/models/registration');
-const User = require('./../../persistence/models/user');
-const logger = require('../../utils/logger');
 
 module.exports = (controller) => {
   controller.on('subscribe_to_notifications', (bot, message) => {
@@ -22,22 +19,6 @@ module.exports = (controller) => {
       }, [{
           pattern: payload.RECEIVE_NOTIFICATIONS_YES,
           callback: (response, convo) => {
-            User.findOne({
-              messangerId: message.user
-            }, function (err, obj) {
-              logger.debug(obj._id);
-              const registration = new Registration({
-                license_plate: 'GD18009',
-                owners: obj._id
-              });
-              registration.save()
-                .then(() => {})
-                .catch(err => {
-                  logger.error(`Cannot save registration. ${err}`);
-                });
-
-            });
-
             convo.stop();
             controller.trigger('type_license_plate', [bot, message]);
           },
