@@ -1,5 +1,8 @@
 const platePattern = require('./../../core/validators/license_plate_patterns');
 const logger = require('../../utils/logger');
+const User = require('./../../persistence/models/user');
+
+const responseKey = 'license_plate';
 
 module.exports = (controller) => {
   controller.on('type_license_plate', (bot, message) => {
@@ -20,14 +23,25 @@ module.exports = (controller) => {
             convo.next();
           },
         }
-      ], {key: 'license_plate'}, 'default');
+      ], {
+        key: responseKey
+      }, 'default');
 
       convo.activate();
 
       convo.on('end', convo => {
         if (convo.status === 'completed') {
-          const license_plate = convo.extractResponse('license_plate');
-          logger.debug(`Extracted response: ${license_plate}`);
+          const licensePlate = convo.extractResponse(responseKey);
+          logger.debug(`Extracted response: ${licensePlate}`);
+
+          User.findOne({messangerId: message.user})
+          .then(user => {
+            logger.debug(user);
+          })
+          .catch(err => {
+            logger.debug(err);
+          });
+
         } else {
           logger.info(`License plate conversation failed. ${convo.status}`);
         }
