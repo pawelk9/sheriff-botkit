@@ -1,10 +1,12 @@
+const platePattern = require('./../../core/validators/license_plate_patterns');
+
 module.exports = (controller) => {
   controller.on('type_license_plate', function (bot, message) {
 
     bot.createConversation(message, function (err, convo) {
 
       convo.addQuestion('Podaj swoją tablicę rejestracyjną', [{
-          pattern: bot.utterances.yes,
+          pattern: platePattern.PL,
           callback: function (response, convo) {
             convo.say('Super. Już zapisuję!');
             bot.replyWithTyping(message, 'Zapisane! Wyślę do Ciebie wiadomość jak tylko coś dostanę :)');
