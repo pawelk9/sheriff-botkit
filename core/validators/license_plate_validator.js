@@ -1,6 +1,4 @@
-const LICENSE_PLATE_PATTERNS = {
-  PL: /[A-Z0-9]{2,3}\s?[A-Z0-9]{3,5}/
-};
+const platePattern = require('./license_plate_patterns');
 
 module.exports = (input) => {
 
@@ -10,7 +8,7 @@ module.exports = (input) => {
   input = input.replace('\n', '');
   input = input.replace(/\W/g, '');
 
-  if (LICENSE_PLATE_PATTERNS.PL.test(input)) {
+  if (platePattern.PL.test(input)) {
     return true;
   }
   return false;
