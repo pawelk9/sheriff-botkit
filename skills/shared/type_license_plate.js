@@ -8,6 +8,7 @@ module.exports = (controller) => {
       convo.addQuestion('Podaj swoją tablicę rejestracyjną', [{
           pattern: platePattern.PL,
           callback: (response, convo) => {
+            logger.debug(response);
             bot.replyWithTyping(message, 'Zapisane! Wyślę do Ciebie wiadomość jak tylko coś dostanę :)');
             convo.next();
           },
@@ -15,6 +16,7 @@ module.exports = (controller) => {
         {
           default: true,
           callback: (response, convo) => {
+            logger.debug(response);
             convo.say('Nie mogę rozponać tablicy. Wpisz w formacie XX XXXXX lub XXX XXXX.');
             convo.repeat();
             convo.next();
@@ -27,9 +29,9 @@ module.exports = (controller) => {
       convo.on('end', convo => {
         if (convo.status === 'completed') {
           var res = convo.extractResponses();
-          logger.info(res);
+          logger.debug(`Extracted response: ${res}`);
         } else {
-          logger.error(`License plate conversation failed. ${convo.status}`);
+          logger.info(`License plate conversation failed. ${convo.status}`);
         }
       });
     });
