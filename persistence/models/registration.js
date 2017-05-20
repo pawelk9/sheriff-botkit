@@ -5,7 +5,9 @@ const registrationSchema = new Schema({
   license_plate: {
     type: String,
     required: true,
-    unique: true
+    unique: true,
+    uppercase: true,
+    trim: true
   },
   owners: {
     type: Schema.Types.ObjectId,
