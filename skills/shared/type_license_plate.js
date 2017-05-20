@@ -41,7 +41,9 @@ module.exports = (controller) => {
                 license_plate: licensePlate,
                 owners: user._id
               });
-              registration.save();
+              return registration.save();
+            }).then((obj) => {
+              logger.debug('then after return' + obj);
             })
             .catch(err => {
               logger.err(err);
