@@ -1,6 +1,7 @@
 const platePattern = require('./../../core/validators/license_plate_patterns');
 const logger = require('../../utils/logger');
 const User = require('./../../persistence/models/user');
+const Registration = require('./../../persistence/models/registration');
 
 const responseKey = 'license_plate';
 
@@ -34,13 +35,24 @@ module.exports = (controller) => {
           const licensePlate = convo.extractResponse(responseKey);
           logger.debug(`Extracted response: ${licensePlate}`);
 
-          User.findOne({messangerId: message.user})
-          .then(user => {
-            logger.debug(user);
-          })
-          .catch(err => {
-            logger.debug(err);
-          });
+          User.findOne({
+              messangerId: message.user
+            })
+            .then(user => {
+              const registration = new Registration({
+                license_plate: licensePlate,
+                owners: user._id
+              });
+
+              registration.save()
+                .then(() => {})
+                .catch(err => {
+                  logger.error(`Cannot save registration. ${err}`);
+                });
+            })
+            .catch(err => {
+              logger.debug(err);
+            });
 
         } else {
           logger.info(`License plate conversation failed. ${convo.status}`);
