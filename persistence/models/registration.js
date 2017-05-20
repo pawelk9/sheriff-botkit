@@ -6,7 +6,8 @@ const registrationSchema = new Schema({
     type: String,
     required: true,
     uppercase: true,
-    trim: true
+    trim: true,
+    unique: true
   },
   owners: {
     type: Schema.Types.ObjectId,
