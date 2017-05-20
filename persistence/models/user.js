@@ -63,8 +63,7 @@ userSchema.statics.getCurrentUser = function (userId) {
         resolve(user);
         return;
       }
-      logger.error(`Cannot find user ${userId}`);
-      reject(`User ${userId} does not exist`);
+      reject(`Cannot find user ${userId}`);
     });
   });
 };
