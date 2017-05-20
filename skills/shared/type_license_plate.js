@@ -40,13 +40,13 @@ module.exports = (controller) => {
           User.getCurrentUser(message.user)
             .then(user => {
 
-              Registration
-                .findOne({
-                  owner: user._id
-                })
-                .populate('owner').then(obj => {
-                  logger.debug('reg find one' + obj);
-                });
+              // Registration
+              //   .findOne({
+              //     owner: user._id
+              //   })
+              //   .populate('owner').then(obj => {
+              //     logger.debug('reg find one' + obj);
+              //   });
 
               const registration = new Registration({
                 license_plate: licensePlate,
