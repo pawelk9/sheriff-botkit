@@ -35,16 +35,13 @@ module.exports = (controller) => {
           const licensePlate = convo.extractResponse(responseKey);
           logger.debug(`Extracted response: ${licensePlate}`);
 
-
-
           User.getCurrentUser(message.user)
             .then(user => {
 
               Registration.getUserRegistrationCount(user._id)
-              .then(count => {
-                logger.debug('getUserRegistrationCount' + count);
-              });
-                
+                .then(count => {
+                  logger.debug('getUserRegistrationCount' + count);
+                });
 
               const registration = new Registration({
                 license_plate: licensePlate,

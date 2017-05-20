@@ -12,6 +12,10 @@ const registrationSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'User',
     required: true
+  },
+  created_at: {
+    type: Date,
+    default: Date.now
   }
 });
 
