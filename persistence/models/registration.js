@@ -16,4 +16,9 @@ const registrationSchema = new Schema({
   }
 });
 
+registrationSchema.pre('save', function (next) {
+  this.license_plate = this.license_plate.replace(/\s/g,'');
+  next();
+});
+
 module.exports = mongoose.model('Registration', registrationSchema);
