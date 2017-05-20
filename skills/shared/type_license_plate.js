@@ -35,19 +35,29 @@ module.exports = (controller) => {
           const licensePlate = convo.extractResponse(responseKey);
           logger.debug(`Extracted response: ${licensePlate}`);
 
+
+
           User.getCurrentUser(message.user)
             .then(user => {
+
+              Registration
+                .findOne({
+                  owner: user._id
+                })
+                .populate('owner').then(obj => {
+                  logger.debug('reg find one' + obj);
+                });
+
               const registration = new Registration({
                 license_plate: licensePlate,
                 owners: user._id
               });
               return registration.save();
-            }).then((obj) => {
-              logger.debug('then after return' + obj);
             })
             .catch(err => {
               logger.error(err);
             });
+
         } else {
           logger.info(`License plate conversation failed. ${convo.status}`);
         }
