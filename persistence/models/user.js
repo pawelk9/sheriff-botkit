@@ -59,10 +59,12 @@ userSchema.statics.getCurrentUser = function (userId) {
     this.findOne({
       messangerId: userId
     }).then(user => {
-      resolve(user);
-    }).catch(err => {
+      if (user) {
+        resolve(user);
+        return;
+      }
       logger.error(`Cannot find user ${userId}`);
-      reject(`User ${userId} does not exist. ${err}`);
+      reject(`User ${userId} does not exist`);
     });
   });
 };
