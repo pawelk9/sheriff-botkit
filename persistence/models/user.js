@@ -61,6 +61,7 @@ userSchema.statics.getCurrentUser = function (userId) {
     }).then(user => {
       resolve(user);
     }).catch(err => {
+      logger.error(`Cannot find user ${userId}`);
       reject(`User ${userId} does not exist. ${err}`);
     });
   });
