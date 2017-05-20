@@ -16,8 +16,22 @@ const registrationSchema = new Schema({
 });
 
 registrationSchema.pre('save', function (next) {
-  this.license_plate = this.license_plate.replace(/\s/g,'');
+  this.license_plate = this.license_plate.replace(/\s/g, '');
   next();
 });
+
+registrationSchema.statics.getUserRegistrationCount = function (userId) {
+  return new Promise((resolve, reject) => {
+    const registrationCount = this.count({
+      owner: userId
+    }).exec();
+
+    registrationCount.then(count => {
+      resolve(count);
+    }).catch(err => {
+      reject(`Cannot get registration count. ${err}`);
+    });
+  });
+};
 
 module.exports = mongoose.model('Registration', registrationSchema);
