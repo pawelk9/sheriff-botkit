@@ -56,7 +56,7 @@ userSchema.statics.alreadyRegistered = function (userId) {
 
 userSchema.statics.getCurrentUser = function (userId) {
   return new Promise((resolve, reject) => {
-    this.findOne.findOne({
+    this.findOne({
       messangerId: userId
     }).then(user => {
       resolve(user);
