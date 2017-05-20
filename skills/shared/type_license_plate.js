@@ -35,6 +35,14 @@ module.exports = (controller) => {
           const licensePlate = convo.extractResponse(responseKey);
           logger.debug(`Extracted response: ${licensePlate}`);
 
+          User.getCurrentUser(message.user)
+          .then(user => {
+            logger.debug('get current user ' + user);
+          })
+          .catch(err => {
+            logger.debug('get current user error ' + err);
+          });
+
           User.findOne({
               messangerId: message.user
             })

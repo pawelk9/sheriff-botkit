@@ -54,4 +54,16 @@ userSchema.statics.alreadyRegistered = function (userId) {
   });
 };
 
+userSchema.statics.getCurrentUser = function (userId) {
+  return new Promise((resolve, reject) => {
+    this.findOne.findOne({
+      messangerId: userId
+    }).then(user => {
+      resolve(user);
+    }).catch(err => {
+      reject(`User ${userId} does not exist. ${err}`);
+    });
+  });
+};
+
 module.exports = mongoose.model('User', userSchema);
