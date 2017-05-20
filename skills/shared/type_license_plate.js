@@ -46,7 +46,7 @@ module.exports = (controller) => {
               logger.debug('then after return' + obj);
             })
             .catch(err => {
-              logger.err(err);
+              logger.error(err);
             });
         } else {
           logger.info(`License plate conversation failed. ${convo.status}`);
