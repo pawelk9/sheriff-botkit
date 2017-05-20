@@ -16,6 +16,10 @@ const registrationSchema = new Schema({
   created_at: {
     type: Date,
     default: Date.now
+  },
+  active: {
+    type: Boolean,
+    default: true
   }
 });
 
