@@ -27,9 +27,11 @@ module.exports = (controller) => {
           pattern: payload.RECEIVE_NOTIFICATIONS_YES,
           callback: (response, convo) => {
 
-            User.getCurrentUser(message.user).then(user => {
+            User.getCurrentUser(message.user)
+              .then(user => {
                 return Promise.all([user, Registration.getUserRegistrationCount(user._id)]);
-              }).then(results => {
+              })
+              .then(results => {
                 const [user, count] = results;
                 if (count > 0) {
                   convo.gotoThread('already_subscribed');
