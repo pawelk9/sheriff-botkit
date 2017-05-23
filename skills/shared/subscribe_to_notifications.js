@@ -1,5 +1,8 @@
 const receiveNotifications = require('./../../messages/receive_notifications');
 const payload = require('./../../consts/payloads');
+const logger = require('../../utils/logger');
+const User = require('./../../persistence/models/user');
+const Registration = require('./../../persistence/models/registration');
 
 module.exports = (controller) => {
   controller.on('subscribe_to_notifications', (bot, message) => {
@@ -14,13 +17,30 @@ module.exports = (controller) => {
         action: 'default',
       }, 'bad_response');
 
+      convo.addMessage({
+        text: 'Już masz zarejestowaną tablice. Nie możesz mieć więcej niż jednej :(',
+        action: 'stop'
+      }, 'already_subscribed');
+
       convo.addQuestion({
         attachment: receiveNotifications('Chcesz otrzymywać powiadomienia?', 'Tak', 'Nie')
       }, [{
           pattern: payload.RECEIVE_NOTIFICATIONS_YES,
           callback: (response, convo) => {
-            convo.stop();
-            controller.trigger('type_license_plate', [bot, message]);
+            User.getCurrentUser(message.user).then(user => {
+                return Registration.getUserRegistrationCount(user._id);
+              }).then(count => {
+                logger.debug('getUserRegistrationCount' + count);
+                if (count > 0) {
+                  convo.gotoThread('already_subscribed');
+                } else {
+                  convo.stop();
+                  controller.trigger('type_license_plate', [bot, message]);
+                }
+              })
+              .catch(err => {
+                logger.error(err);
+              });
           },
         },
         {
