@@ -58,6 +58,10 @@ module.exports = (controller) => {
       ], {}, 'default');
 
       convo.activate();
+
+      convo.on('end', convo => {
+        logger.debug(`convo status ${convo.status}`);
+      });
     });
   });
 };
