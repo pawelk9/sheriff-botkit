@@ -6,7 +6,6 @@ const Registration = require('./../../persistence/models/registration');
 
 module.exports = (controller) => {
   controller.on('subscribe_to_notifications', (bot, message) => {
-
     bot.createConversation(message, (err, convo) => {
       convo.addMessage({
         text: 'Spoko. Możesz zapisać się w każdej chwili w menu.',
@@ -27,10 +26,11 @@ module.exports = (controller) => {
       }, [{
           pattern: payload.RECEIVE_NOTIFICATIONS_YES,
           callback: (response, convo) => {
+
             User.getCurrentUser(message.user).then(user => {
-                return Registration.getUserRegistrationCount(user._id);
-              }).then(count => {
-                logger.debug('getUserRegistrationCount' + count);
+                return Promise.all([user, Registration.getUserRegistrationCount(user._id)]);
+              }).then(results => {
+                const [user, count] = results;
                 if (count > 0) {
                   convo.gotoThread('already_subscribed');
                 } else {
